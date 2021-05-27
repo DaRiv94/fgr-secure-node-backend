@@ -12,7 +12,9 @@ module.exports = {
       fun_fact: {
         type: DataTypes.STRING,
         allowNull: false
-      }
+      },
+      createdAt: DataTypes.DATE,
+      updatedAt: DataTypes.DATE
     });
   },
 

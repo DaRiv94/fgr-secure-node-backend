@@ -1,5 +1,5 @@
 // .sequelizerc
-console.log("Hello there sequelizerc!!!!!!!!!!!!!!!!")
+
 const path = require('path');
 
 module.exports = {

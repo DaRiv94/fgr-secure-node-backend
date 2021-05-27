@@ -1,30 +1,41 @@
 const express = require('express');
 const router = express.Router();
 const KubernetesFunFacts = require('../models/Kubernetesfunfacts');
-// const { Op } = require("sequelize");
+const MicrosoftFunFacts = require('../models/Microsoftfunfact');
 
-
-//Get all Catgeories /category
+//Get all funfacts for a subject
 router.get("/", async (req, res) => {
-    try {
-        let allkubernetesfunfacts = await KubernetesFunFacts.findAll();
 
-        res.send({ funfacts: allkubernetesfunfacts });
+    let Model = getModel(process.env.FUN_FACT_TABLE)
+
+    try {
+        let funfacts = await Model.findAll();
+
+        res.send({ funfacts: funfacts });
     } catch (e) {
         res.status(500).send({ "Error": e });
     }
 
 });
 
-// router.get("/", async (req, res) => {
-//     try {
+//Check if system is healthy
+router.get("/healthy", async (req, res) => {
+    try {
+        res.status(200).json({ detail: "System Is Healthy" });
+    } catch (e) {
 
-//         res.status(200).json({detail:"System Is Healthy"});
-//     } catch (e) {
+        res.status(500).send({ "Error": String(e) });
+    }
 
-//         res.status(500).send({ "Error": String(e) });
-//     }
+});
 
-// });
+function getModel(table_name) {
+    console.log("table_name: ", table_name)
+    if (table_name === 'Kubernetes') {
+        return KubernetesFunFacts
+    } else if (table_name === 'Microsoft') {
+        return MicrosoftFunFacts
+    }
+}
 
 module.exports = router;

@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-console.log("Hello there!!!!!!!!!!!!!!!!")
+//Parse DATABASE_URL for sequelize config
 let configObject={}
 if(process.env.DATABASE_URL){
     connection_string_to_parse = process.env.DATABASE_URL
@@ -14,7 +14,6 @@ if(process.env.DATABASE_URL){
     configObject['DB_PORT'] = connectionstring_array[3]
     configObject['DB'] = connectionstring_array[4]
 }
-
 
 module.exports = {
     development: {

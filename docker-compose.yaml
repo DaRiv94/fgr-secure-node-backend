@@ -33,6 +33,8 @@ services:
             - /app/node_modules
             - .:/app
         env_file: .env
+        depends_on:
+            - database
         environment: 
             - CHOKIDAR_USEPOLLING=true
         networks: 

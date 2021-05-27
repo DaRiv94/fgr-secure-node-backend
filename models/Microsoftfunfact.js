@@ -1,9 +1,9 @@
 const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = require("../db/sequelize");
 
-class KubernetesFunFacts extends Model {}
+class MicrosoftFunFacts extends Model {}
 
-KubernetesFunFacts.init({
+MicrosoftFunFacts.init({
   // Model attributes are defined here
   id:{
     type:Sequelize.INTEGER(11),
@@ -18,10 +18,10 @@ KubernetesFunFacts.init({
 }, {
   // Other model options go here
   sequelize, // We need to pass the connection instance
-  modelName: 'KubernetesFunFacts' // We need to choose the model name
+  modelName: 'MicrosoftFunFacts' // We need to choose the model name
 });
 
 // the defined model is the class itself
-console.log(`KubernetesFunFacts Model: ${KubernetesFunFacts === sequelize.models.KubernetesFunFacts}`); // true
+console.log(`MicrosoftFunFacts Model: ${MicrosoftFunFacts === sequelize.models.MicrosoftFunFacts}`); // true
 
-module.exports = KubernetesFunFacts;
+module.exports = MicrosoftFunFacts;
