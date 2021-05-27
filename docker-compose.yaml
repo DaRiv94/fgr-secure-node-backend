@@ -1,0 +1,39 @@
+version: '3.8'
+
+networks:
+    secureapp:
+      external: false
+
+volumes:
+    postgres_db_volume:
+        external: false
+    
+
+services:
+    database:
+        container_name: pg1
+        image: postgres:13.0
+        ports:
+            - "5432:5432"
+        networks:
+            - secureapp
+        environment:
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_USER=postgres
+            - POSTGRES_DB=local_fgr_budget
+        volumes:
+            - "postgres_db_volume:/var/lib/postgresql/data"
+    web:
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        ports:
+            - "7500:7500"
+        volumes:
+            - /app/node_modules
+            - .:/app
+        env_file: .env
+        environment: 
+            - CHOKIDAR_USEPOLLING=true
+        networks: 
+            - secureapp
